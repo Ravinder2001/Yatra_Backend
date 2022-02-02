@@ -21,6 +21,18 @@ router.get("/", async (req, res) => {
 		return res.send(err.message);
 	}
 });
+router.get("/userData", async (req, res) => {
+	try {
+		let qurey = req.query.mobile;
+		const user = await User.find({ mobile: { $regex: qurey } })
+			.lean()
+			.exec();
+
+		return res.send(user);
+	} catch (err) {
+		return res.send(err.message);
+	}
+});
 router.post("/flight", async (req, res) => {
 	try {
 		const flight = await Flight.create(req.body);
