@@ -24,9 +24,7 @@ router.get("/", async (req, res) => {
 router.get("/userData", async (req, res) => {
 	try {
 		let qurey = req.query.mobile;
-		const user = await User.find({ mobile: { $regex: qurey } })
-			.lean()
-			.exec();
+		const user = await User.findOne({ mobile: qurey }).lean().exec();
 
 		return res.send(user);
 	} catch (err) {
