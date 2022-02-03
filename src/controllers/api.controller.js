@@ -2,6 +2,14 @@ const express = require("express")
 const router = express.Router()
 const User = require("../models/user.model")
 const Flight = require("../models/flight.model");
+const https = require("https");
+const qs = require("querystring");
+const PORT = process.env.PORT || 4000;
+// const checksum_lib = require("../Paytm/checksum");
+// const config = require("../Paytm/config");
+const parseUrl = express.urlencoded({ extended: false });
+const parseJson = express.json({ extended: false });
+
 router.post("/user", async (req, res) => {
 	try {
 		const user = await User.create(req.body);
